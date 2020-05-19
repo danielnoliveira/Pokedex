@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-
+import { FaSearchPlus } from "react-icons/fa";
 import './App.css';
 import api from './services/api';
 function App() {
@@ -8,7 +8,7 @@ function App() {
   useEffect(()=>{
     async function fillPokemons(){
       var pokemonsList = [];
-      for(let i = 1;i<152;i++){
+      for(let i = 1;i<252;i++){
         const {data} = await api.get(`pokemon/${i}`);
         pokemonsList.push({
           id:i,
@@ -30,6 +30,9 @@ function App() {
       return pokemon.name.includes(e.target.value);
     })]);
   }
+  function showInfoCard(id){
+    document.querySelectorAll('.pokemon__info')[id].classList.toggle('pokemon__info--active');
+  }
   return (
     <div className="App">
         <header className="App__header">
@@ -42,13 +45,9 @@ function App() {
               return(
                 <div key={pokemon.id} className={`pokemon ${pokemon.types[pokemon.types.length-1]["type"]["name"]}`}>
                   <img src={pokemon.avatar} alt="pokemon front"/>
-                  <span>{pokemon.name}</span>
-                  <div className="pokemon__types">
-                  {pokemon.types.map(t=>{
-                    return(
-                      <span className={`${t["type"]["name"]} type`}>{t["type"]["name"]}</span>
-                    );
-                  })}
+                  <span className="pokemon__name">{pokemon.name}</span>
+                  <div className="pokemon__info">
+                    <FaSearchPlus className="info__button" onClick={()=>showInfoCard(pokemon.id-1)}/>
                   </div>
                 </div>
               );
