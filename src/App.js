@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-
+import {} from '@fortawesome/fontawesome-free';
 import './App.css';
 import api from './services/api';
 function App() {
@@ -30,6 +30,9 @@ function App() {
       return pokemon.name.includes(e.target.value);
     })]);
   }
+  function infoCard(id){
+    document.querySelectorAll(".pokeball")[id].classList.toggle('pokeball--active');
+  }
   return (
     <div className="App">
         <header className="App__header">
@@ -42,13 +45,18 @@ function App() {
               return(
                 <div key={pokemon.id} className={`pokemon ${pokemon.types[pokemon.types.length-1]["type"]["name"]}`}>
                   <img src={pokemon.avatar} alt="pokemon front"/>
-                  <span>{pokemon.name}</span>
+                  <span className="pokemon__name">{pokemon.name}</span>
                   <div className="pokemon__types">
-                  {pokemon.types.map(t=>{
+                  {pokemon.types.map((t,index)=>{
                     return(
-                      <span className={`${t["type"]["name"]} type`}>{t["type"]["name"]}</span>
+                      <span key={index} className={`${t["type"]["name"]} type`}>{t["type"]["name"]}</span>
                     );
                   })}
+                  </div>
+                  <div className="pokeball" onClick={()=>infoCard(pokemon.id-1)}>
+                    <div className="pokeball__header"></div>
+                    <div className="pokeball__button"></div>
+                    <div className="pokeball__footer"></div>
                   </div>
                 </div>
               );
