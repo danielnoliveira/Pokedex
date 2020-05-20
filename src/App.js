@@ -5,10 +5,11 @@ import api from './services/api';
 function App() {
   const [pokemons,setPokemons] = useState([]);
   const [data,setData] = useState([]);
+  const [loading,setLoading] = useState(true);
   useEffect(()=>{
     async function fillPokemons(){
       var pokemonsList = [];
-      for(let i = 1;i<252;i++){
+      for(let i = 1;i<387;i++){
         const {data} = await api.get(`pokemon/${i}`);
         pokemonsList.push({
           id:i,
@@ -20,6 +21,7 @@ function App() {
           height:data.height
         });
       }
+      setLoading(false);
       setPokemons([...pokemonsList]);
       setData([...pokemonsList]);
     }
@@ -33,6 +35,35 @@ function App() {
   function showInfoCard(id){
     document.querySelectorAll('.pokemon__info')[id].classList.toggle('pokemon__info--active');
   }
+  function LoadOrShowList(){
+    if(loading){
+      return (
+        <div className="container">
+          <div className="container__loading">
+
+          </div>
+          <h3 className="container__text">Loading<span>.</span><span>.</span><span>.</span></h3>
+        </div>
+
+      );
+    }else{
+      return (
+        <div className="list__pokemon">
+          {pokemons.map(pokemon=>{
+            return(
+              <div key={pokemon.id} className={`pokemon ${pokemon.types[pokemon.types.length-1]["type"]["name"]}`}>
+                <img src={pokemon.avatar} alt="pokemon front"/>
+                <span className="pokemon__name">{pokemon.name}</span>
+                <div className="pokemon__info">
+                  <FaSearchPlus className="info__button" onClick={()=>showInfoCard(pokemon.id-1)}/>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
+  }
   return (
     <div className="App">
         <header className="App__header">
@@ -40,19 +71,7 @@ function App() {
           <input onChange={(e)=>atualizarLista(e)} className="header__inputSearch" type="text" name="pokemon" placeholder="Pokemon name"/>
         </header>
         <main className="App__list">
-          <div className="list__pokemon">
-            {pokemons.map(pokemon=>{
-              return(
-                <div key={pokemon.id} className={`pokemon ${pokemon.types[pokemon.types.length-1]["type"]["name"]}`}>
-                  <img src={pokemon.avatar} alt="pokemon front"/>
-                  <span className="pokemon__name">{pokemon.name}</span>
-                  <div className="pokemon__info">
-                    <FaSearchPlus className="info__button" onClick={()=>showInfoCard(pokemon.id-1)}/>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <LoadOrShowList />
         </main>
     </div>
   );
