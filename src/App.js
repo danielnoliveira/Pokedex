@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from 'react';
-import { FaSearchPlus } from "react-icons/fa";
+import { FaSearchPlus} from "react-icons/fa";
+import {AiFillCloseCircle} from 'react-icons/ai';
 import './App.css';
 import api from './services/api';
 function App() {
@@ -9,7 +10,7 @@ function App() {
   useEffect(()=>{
     async function fillPokemons(){
       var pokemonsList = [];
-      for(let i = 1;i<387;i++){
+      for(let i = 1;i<494;i++){
         const {data} = await api.get(`pokemon/${i}`);
         pokemonsList.push({
           id:i,
@@ -34,6 +35,16 @@ function App() {
   }
   function showInfoCard(id){
     document.querySelectorAll('.pokemon__info')[id].classList.toggle('pokemon__info--active');
+    document.querySelectorAll('.info__buttonExit')[id].classList.toggle('info__buttonExit--active');
+    document.querySelectorAll('.info__button')[id].classList.toggle('info__button--active');
+    const divInfo = document.querySelectorAll('.info__container')[id];
+    if(!divInfo.classList.contains('info__container--active')){
+      setTimeout(()=>{
+        divInfo.classList.toggle('info__container--active');
+      },600);
+    }else{
+      divInfo.classList.toggle('info__container--active');
+    }
   }
   function LoadOrShowList(){
     if(loading){
@@ -56,6 +67,33 @@ function App() {
                 <span className="pokemon__name">{pokemon.name}</span>
                 <div className="pokemon__info">
                   <FaSearchPlus className="info__button" onClick={()=>showInfoCard(pokemon.id-1)}/>
+                  <AiFillCloseCircle className="info__buttonExit" onClick={()=>showInfoCard(pokemon.id-1)}/>
+                  <div className="info__container">
+                    <div className="pokemon__types">
+                      {pokemon.types.map((t,index)=>{
+                        return(
+                          <span key={index} className={`${t["type"]["name"]} type`}>{t["type"]["name"]}</span>
+                        );
+                      })}
+                    </div>
+                    <div className="pokemon__stats">
+                        {pokemon.stats.map((stat,index)=>{
+                          return (
+                            <div className="stat" key={index}>
+                              <span className="stat__title">{stat.stat.name}</span>
+                              <div className="stat__bar">
+                                <div className="bar" style={{width:(stat.base_stat/255)*100}}></div>  
+                                {stat.base_stat}
+                              </div>
+                            </div>
+                          );
+                        })}
+                    </div>
+                    <div className="pokemon__secondaryStats">
+                      <span className="secondaryStats__height">Height:{pokemon.height}</span>
+                      <span className="secondaryStats__weight">Weight:{pokemon.weight}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             );
