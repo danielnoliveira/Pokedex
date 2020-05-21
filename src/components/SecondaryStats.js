@@ -1,5 +1,5 @@
 import React from 'react';
-import './SecondaryStats';
+import './SecondaryStats.css';
 export default function SecondaryStats({height,weight}) {
     return(
         <div className="pokemon__secondaryStats">
