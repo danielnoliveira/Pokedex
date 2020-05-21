@@ -2,34 +2,17 @@ import React,{useEffect,useState} from 'react';
 import { FaSearchPlus} from "react-icons/fa";
 import {AiFillCloseCircle} from 'react-icons/ai';
 import './App.css';
-import api from './services/api';
+import pokemonsList from './data/pokemon.json';
 function App() {
   const [pokemons,setPokemons] = useState([]);
-  const [data,setData] = useState([]);
+
   const [loading,setLoading] = useState(true);
   useEffect(()=>{
-    async function fillPokemons(){
-      var pokemonsList = [];
-      for(let i = 1;i<494;i++){
-        const {data} = await api.get(`pokemon/${i}`);
-        pokemonsList.push({
-          id:i,
-          name:data.name,
-          stats:data.stats,
-          avatar:data.sprites.front_default,
-          types:data.types,
-          weight:data.weight,
-          height:data.height
-        });
-      }
-      setLoading(false);
       setPokemons([...pokemonsList]);
-      setData([...pokemonsList]);
-    }
-    fillPokemons();
+      setLoading(false);
   },[]);
   function atualizarLista(e){
-    setPokemons([...data.filter((pokemon)=>{
+    setPokemons([...pokemonsList.filter((pokemon)=>{
       return pokemon.name.includes(e.target.value);
     })]);
   }
@@ -63,7 +46,7 @@ function App() {
           {pokemons.map(pokemon=>{
             return(
               <div key={pokemon.id} className={`pokemon ${pokemon.types[pokemon.types.length-1]["type"]["name"]}`}>
-                <img src={pokemon.avatar} alt="pokemon front"/>
+                <img src={require(`./images/${pokemon.avatar}`)} alt="pokemon front"/>
                 <span className="pokemon__name">{pokemon.name}</span>
                 <div className="pokemon__info">
                   <FaSearchPlus className="info__button" onClick={()=>showInfoCard(pokemon.id-1)}/>
