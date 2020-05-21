@@ -1,0 +1,29 @@
+.pokemon{
+    min-height: 300px;
+    min-width: 300px;
+    margin: 10px;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    box-sizing: border-box;
+  }
+  
+  .pokemon__name{
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #306bb3;
+    color:#ffcb05;
+    border: 3px solid #ffcb05;
+    border-radius: 20px;
+    font-size: 1.20rem;
+    letter-spacing: 3px;
+    padding: 5px 8px;
+  }
+  .pokemon img{
+    width: 192px;
+    height: 192px;
+  }
+  

@@ -1,0 +1,21 @@
+.stat{
+    width: 100%;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    margin: 1px 0;
+  }
+  .stat__title{
+    margin-left: 10px;
+  }
+  .stat__bar{
+    margin-right: 10px;
+    width: 150px;
+    display: flex;
+  
+  }
+  .bar{
+    height: 16.25px;
+    background-color: #ffcb05;
+    margin-right: 2px;
+  }

@@ -1,0 +1,6 @@
+.info__container{
+    display: none;
+  }
+  .info__container--active{
+    display: block;
+  }
