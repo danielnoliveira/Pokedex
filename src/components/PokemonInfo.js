@@ -2,7 +2,7 @@ import React from 'react';
 import './PokemonInfo.css';
 import { FaSearchPlus} from "react-icons/fa";
 import {AiFillCloseCircle} from 'react-icons/ai';
-import PokemonInfoContainer from './PokemonInfoContainer';
+import PokemonInfoContainer from './PokemonInfoContainer.js';
 function showInfoCard(id){
     document.querySelectorAll('.pokemon__info')[id].classList.toggle('pokemon__info--active');
     document.querySelectorAll('.info__buttonExit')[id].classList.toggle('info__buttonExit--active');
