@@ -16,11 +16,11 @@ function showInfoCard(id){
       divInfo.classList.toggle('info__container--active');
     }
 }
-export default function PokemonInfo({id,types,stats,height,weight}) {
+export default function PokemonInfo({id,types,stats,height,weight,newid}) {
     return (
         <div className="pokemon__info">
-            <FaSearchPlus className="info__button" onClick={()=>showInfoCard(id-1)}/>
-            <AiFillCloseCircle className="info__buttonExit" onClick={()=>showInfoCard(id-1)}/>
+            <FaSearchPlus className="info__button" onClick={()=>showInfoCard(newid)}/>
+            <AiFillCloseCircle className="info__buttonExit" onClick={()=>showInfoCard(newid)}/>
             <PokemonInfoContainer types={types} height={height} weight={weight} stats={stats}/>    
         </div>
     );
