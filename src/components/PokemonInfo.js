@@ -16,7 +16,7 @@ function showInfoCard(id){
       divInfo.classList.toggle('info__container--active');
     }
 }
-export default function PokemonInfo({id,types,stats,height,weight,newid}) {
+export default function PokemonInfo({types,stats,height,weight,newid}) {
     return (
         <div className="pokemon__info">
             <FaSearchPlus className="info__button" onClick={()=>showInfoCard(newid)}/>
