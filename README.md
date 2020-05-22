@@ -20,6 +20,7 @@
    <a href="https://github.com/danielnoliveira/Pokedex/stargazers">
     <img alt="Stargazers" src="https://img.shields.io/github/stars/danielnoliveira/Pokedex">
   </a>
+  <img alt="Netlify" src="https://img.shields.io/netlify/ad8e02f4-daa9-486e-b42a-618b40bc1416">
 </p>
 
 <p align="center">
