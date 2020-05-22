@@ -43,7 +43,6 @@ This is a project done just for fun and to train my React JS skills.
 This project was developed with the following technologies:
 
 - [React](https://reactjs.org)
-- [axios](https://github.com/axios/axios)
 - [react-icons](https://react-icons.github.io/react-icons/)
 - [Yarn](https://yarnpkg.com/)
 ## How To Use
